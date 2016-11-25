@@ -175,11 +175,11 @@ void decoder (float result) {
 	
 	round(result, r); //rounding + dot 
 	int x[7]; 
-	ctob(r[0], x[0]);
+	ctob(r[0], &x);
 	send(&x, L1);
-	ctob(r[1], x[0]);
+	ctob(r[1], &x);
 	send(&x, L2);
-	ctob(r[2], x[0]);
+	ctob(r[2], x);
 	send(&x, L3);
 } //end of decoder 
 
@@ -195,7 +195,7 @@ char ftostr(float x, int n) {
 	return 48 + y;
 }
 
-void round (float f, char*c){
+void round (float f, char *c){
 	int helper = 0;
 	if (f>=0){
 		helper = P1; //defined as pin
@@ -217,7 +217,7 @@ void round (float f, char*c){
 	c[2] = temp;
 }
 
-void ctob(char i, int &x){
+void ctob(char i, int *x){
 	x[0] = i&0x01;
 	x[1] = ((i>>1)&0x01);
 	x[2] = ((i>>2)&0x01);
